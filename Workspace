@@ -1,0 +1,34 @@
+<NotepadPlus>
+    <Project name="The Den CC">
+        <Folder name="assets">
+            <Folder name="branding">
+                <File name="assets\branding\theden.jpg" />
+                <File name="assets\branding\thedentrans.jpg" />
+                <File name="assets\branding\thedentrans.png" />
+                <File name="assets\branding\theden_D.bmp" />
+                <File name="assets\branding\theden_D.gif" />
+                <File name="assets\branding\theden_D.png" />
+                <File name="assets\branding\theden_Da.bmp" />
+                <File name="assets\branding\theden_Da.gif" />
+                <File name="assets\branding\theden_Da.png" />
+                <File name="assets\branding\theden_logo_edited.jpg" />
+            </Folder>
+            <Folder name="fonts">
+                <File name="assets\fonts\AlegreyaSans-Regular.ttf" />
+                <File name="assets\fonts\BadScript-Regular.ttf" />
+                <File name="assets\fonts\CinzelDecorative-Regular.ttf" />
+            </Folder>
+            <Folder name="images_OC" />
+            <Folder name="images_PC" />
+        </Folder>
+        <Folder name="includes">
+            <Folder name="db_conn" />
+        </Folder>
+        <Folder name="partPages">
+            <File name="partPages\header.php" />
+            <File name="partPages\footer.php" />
+        </Folder>
+        <File name="index.php" />
+        <File name="styles.css" />
+    </Project>
+</NotepadPlus>
