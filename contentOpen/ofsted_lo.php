@@ -13,7 +13,7 @@
  		<div class='spanTitleCenter'> Ofsted Regulatatory Responisbilites</div>
 
  		<div class='flex-container'>
-			<section class='rows'>			
+			<div class='rows'>			
 			<div class='columns'>
 				<p class='pageText'><img src='assets/images_OC/Ofsted-logo.gif' style='float:left; padding: 0px 10px; height: 75px'>Ofsted register and inspect those who provide early education or childcare for children aged from birth up to their eighth birthday.</br>They do this to help reassure you that when your children are in registered childcare they are cared for by people who are suitable.</br></br> There are two different registers for childcare providers: the Early Years Register and the Childcare Register. The Childcare Register is in two parts – a compulsory part and a voluntary part. You can find details in their ‘Early years and childcare registration handbook' 
 				</p>
