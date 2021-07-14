@@ -42,7 +42,7 @@
 			
 			<button class='snackBarButton' onclick="mySnackbar()">Feeling left behind because of lockdown?<img class='denImage' src='assets/images_OC/babi.gif' style='width=280px; height= 150px'></button>
 
-				<div id="snackbar">Check out our Tutoring classes <a class='snackBarButton' href='forms\contactForm.php' alt='Contact form' style='text-decoration: none; color: LemonChiffon'>Contact Us here</a></div>
+				<div id="snackbar">Check out our Tutoring classes <a class='snackBarButton' href='forms\contactForm.php' alt='Contact form' >Contact Us here</a></div>
 
 		</div>
 	</section>
