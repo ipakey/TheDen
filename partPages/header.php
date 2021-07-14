@@ -33,7 +33,7 @@ session_start();
 	<div class='mottoTextItalic' style='font-size: 30px'>SAFE . ACTIVE . FUN </div>
 	<div class='headerText'>Wraparound Childcare for School Aged Children</div>
 	<div class='subHeaderText'>
-		<marquee behavior="alternate" scrollamount='5'>****** Now Taking Summer Holiday Bookings ****** </marquee>
+		<marquee behavior="alternate" scrollamount='5'>** Now Taking Summer Holiday Bookings ** </marquee>
 	</div>
 </div>
 
