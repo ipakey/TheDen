@@ -28,7 +28,7 @@
 		} 
 		//echo 'Timetable:$date_type:  '.var_dump($dateType);
 		return $dateType;
-	 	mysqli_stmt_close();
+	 	mysqli_stmt_close($stmt);
 	}
 
 
@@ -231,7 +231,7 @@
 		
 //echo $slot;
 		return $slot;
-	 	mysqli_stmt_close();
+	 	mysqli_stmt_close($stmt);
 	}
 
 
@@ -265,7 +265,7 @@
 		$bookedCount= bkdCnts($booked);	
 		$bookedAmend = bkdAmend($booked, $bookedCount);
 		return $bookedAmend;
-	 	mysqli_stmt_close();
+	 	mysqli_stmt_close($stmt);
 		
 	}
 	
@@ -549,29 +549,7 @@
 		
 	}
 	
-	function dlyBookings( $dt, $week, $year, $user){
-		$rBkd = findBookings($week, $year, $user);
-		//echo var_dump($rBkd);
-		$dlyBookings=array();
-		if($user > 9){
-			$sBkd = returnBookSingle($dt, $user);
-		}
-		else{
-			$sBkd =[];
-		}
-		//echo var_dump($rBkd. $sBkd);
-		
-		$lenA = count($rBkd);
-		$lenB = count($sBkd);
-		if($lenB !== 0){
-			array_push($bkd, $rBkd, $sBkd);
-		}
-		elseif($lenA !=0){
-			array_push($bkd, $rBkd);
-		}
-		//asort($dlyBookings);
-		return $dlyBookings;	
-	} 
+
 	
 	
 	function checkTimeSlotString($date, $dt, $ts, $inds, $groups, $subject, $confirmed, $name){
@@ -587,7 +565,7 @@
 			$slotStatus = 'booked';
 		}
 		elseif(!empty($groups)){
-			$count = $arr[$ts];			
+			$count = $groups[$ts];			
 			$slotStatus = 'group ('.$count. '): '.$subject; 
 //echo $slotStatus;
 		}
@@ -804,69 +782,5 @@
 		return $indData;
 	}
 			
-			
-	function checkTimeSlotReport($booked){
-		$slotStatus = '';
-
-		foreach ($booked as $book){ 
-			$type = $book['bk_group'];	
-			$tsa = $book['bk_timeslot'];
-			$date = $book['bk_date'];
-			
-			
-			if($tsa == null){
-				$slotStatus = 'open';
-			}
-
-
-			//prebooking found
-			elseif($ts == $tsa){						
-		
-				if($type == 'Ind'){				
-					$slotStatus = 'booked';
-//echo $slotStatus;	
-				}	
-				elseif($type = 'Grp') {						
-
-					$sub = $book['bk_subject'];				
-					$count = $book['0'];							
-					$sub = $book['bk_subject'];
-					$slotStatus = 'group: '.$sub.' ('.$count.')';
-//echo $slotStatus;	
-				}
-				else{
-					$slotStatus = 'open';
-				}
-				
-				
-			}
-		}
-		return $slotStatus ;
-	}
-
-
 	
-	function statusInd($r, $inds){
-		if($leni > 0){	
-			if(in_array($bkdate, $inds)== true && in_array($bkts, $inds)==true){
-			$slotStatus = 'Booked';
-			}
-		}
-		else{
-			$slotStatus = '';
-		}
-		return $slotStatus;
-	}
-	
-		function statusGrp($r, $groups){
-		if($leng > 0){
-			if(in_array($bkdate, $inds)== true && in_array($bkts, $inds)==true){
-			$slotStatus = 'group ('.$count.') ';
-			}
-		}
-		else{
-			$slotStatus = '';
-		}
-		return $slotStatus;
-	}
 

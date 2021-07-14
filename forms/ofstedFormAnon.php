@@ -20,8 +20,8 @@
 	
 	<div class='spanTitleCenter'>Leave Feedback for Ofsted about The Den</div>
 	<div class='textAreaForm' style='color:LemonChiffon'>
-			<p class='pageText' style='width:95%'>Please use this form to share your feedback with Ofsted. 
-			 We are assuming that you want to share this feedback with Ofsted, if you don't want your name or details attached to this feedback please check the anonmyise contact button.</br>
+			<p class='pageText' style='width:85%'>Please use this form to share your feedback with Ofsted. 
+			You have chosen to annonymise your feedback to Ofsted. Please be aware that this form will be sent to our database for forwarding to Ofsted. If you don't want to share your comment with us please go to our >Oversite> Ofsted page where we have provided details for direct contact with them. </br>
 			Whatever you say Thank you for your feedback.			
 			</p>
 	</div>

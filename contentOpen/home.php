@@ -40,22 +40,22 @@
 		<div class='rows'>
 		
 			
-			<button class='snackBarButton' onclick="mySnackbar()">Feeling left behind because of lockdown?<img class='denImage' src='assets/images_OC/babi.gif' style='width=280px; height= 150px'></button>
+			<button class='snackBarButton' onclick="mySnackbar()">Feeling left behind because of lockdown?<img class='denImage' src='assets/images_OC/babi.gif' style='width:280px; height: 150px'></button>
 
 				<div id="snackbar">Check out our Tutoring classes <a class='snackBarButton' href='forms\contactForm.php' alt='Contact form' >Contact Us here</a></div>
 
 		</div>
 	</section>
 
-	<section class='rows' style='margin-bottom: 25px'>
+	<section class='rows' style='margin-bottom:25px;'>
 		<div class='columns'>
 	
-		<div class='rows'><img src ='assets/images_OC/playYellow.png'   style='width: 20%; margin-bottom: 25px; padding-right: 40px'>
+			<div class='rows'><img src ='assets/images_OC/playYellow.png'   style='width: 20%; margin-bottom: 25px; padding-right: 40px'>
+			
+				<p class='pageText'>I have over 30 years of working with children in a voluntary capacity, and know that no one does anything perfectly every time. So I don't laugh at anyone for trying, I offer the space and help to practice, and improve skills and knowledge of all sorts. And provide a variety of learning methods for those who find something difficult. We allow your child to have fun while being safe and engaged with their own lives. We have the time to help, and we use it well.</p>
 		
-		<p class='pageText'>I have over 30 years of working with children in a voluntary capacity, and know that no one does anything perfectly every time. So I don't laugh at anyone for trying, I offer the space and help to practice, and improve skills and knowledge of all sorts. And provide a variety of learning methods for those who find something difficult. We allow your child to have fun while being safe and engaged with their own lives. We have the time to help, and we use it well.</p>
-	
-		<p class='pageText'>We offer a routine that is full of activity, learning and relaxation, that fits around the school day, and your work day. You can book sessions online or schedule them by a longer term agreement.</p>
-		</div>
+				<p class='pageText'>We offer a routine that is full of activity, learning and relaxation, that fits around the school day, and your work day. You can book sessions online or schedule them by a longer term agreement.</p>
+			</div>
 		</div>
 		
 	</section>
