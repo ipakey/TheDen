@@ -35,7 +35,14 @@
 		//Now create the HTML table
 		$calendar="<table class='table table-bordered'>";
 		$calendar.="<center><h4 class='spanTitleCenter'>$monthName $year</h4></center>";
-		$calendar.="<p class='pageText' >Please select current month first available dates will be highlighted:</br></p>";
+		if(isset($_GET['error'])){
+			if($_GET['error']== 'successBookAgain'){
+				$calendar.="<p class='pageText'>Congratulations you have booked this slot you will receive an email conformation shortly. You may be asked for the conformation number at payment. \n if you would like to book again please press current month to find available slots</p>";
+			}
+			else{
+				$calendar.="<p class='pageText' >Please select current month to find first available dates:</br></p>";
+			}
+		}
 		$calendar.="<center><a class='bookingsHeaderButton' href='forms/bookingsCalendar.php?othmonth=".date('m',mktime(0,0,0,$month-1,1,$year))."&othyear=".date('Y',mktime(0,0,0,$month-1,1,$year))."'>Previous Month</a>";
 
 		$calendar.="<a class='bookingsHeaderButton' href='forms/bookingsCalendar.php?othmonth=".date('m')."&othyear=".date('Y')."'>Current Month</a>";

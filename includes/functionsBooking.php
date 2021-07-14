@@ -225,7 +225,6 @@
 		while($row=mysqli_fetch_assoc($resultData)){		
 			//array_push($ses, $row);
 			$slot = $row['ss_sessionid'];
-			
 			//array_push($booked, $record);
 		} 
 			
