@@ -3,7 +3,7 @@
 $dBserver = "localhost";
 $dBusername = "root";
 $dBpwd = "";
-$dBname = "bookings";
+$dBname = "thedencontacts";
 
 $connbookings = mysqli_connect($dBserver, $dBusername, $dBpwd, $dBname);
 

@@ -41,7 +41,7 @@
 	<div class='flex-container'>
 
 		<section class='rows'>
-		<form method='post' action=''>
+		<form class = 'pageText' method='post' action=''>
 			<input class='pageText' type="radio" name="wk" value="wk">This Week</input>
 			<input class='pageText'type="radio" name="wk" value="mt">One month Ahead</input>
 			<input class='pageText'type="radio" name="wk" value="all">All Records</input>
@@ -51,23 +51,37 @@
 	if (isset($_POST['bookingsReptSubmit'])) {
 		if(isset($_POST['wk']))
 		{
-		echo "You have selected : ".$_POST['wk'];  //  Displaying Selected Value
+			if($_POST['wk'] == 'wk'){$len = ' Week';}
+			elseif($_POST['wk'] == 'mt'){$len = ' Month ';}
+			elseif($_POST['wk'] == 'all'){$len = ' All Records';}
+			else{$len = ' no selection made yet';}
+		echo "You have selected : ".$len;  //  Displaying Selected Value
 		$wk = $_POST['wk'];
 		}
-		$dateRange = getStartAndEndDateRpt($wk);
-		$booked = findBookingsReport($dateRange, $user);
+		$dates = getStartAndEndDateRpt($wk);
+		//echo ' dates found ';
 		
-		$timeSlotRpt = displayTimeSlotReport($dateRange);
+		$booked = findBookingsReport($dates, $user);
+		//echo ' bookings found ';
+		
+		$timeSlotRpt = displayTimeSlotReport($booked, $user);
 	}
 	?>
 		
 			<div class='columns'>
-				<p class='pageText'>
+				
 				<?php
-//echo var_dump($timeSlotRpt);
-				echo $timeSlotRpt;
+				$timeSlotRpt = 0;
+				if($timeSlotRpt = null){?>
+					<p class='pageText'>Please select the time period you want to see:</p> <?php
+				}else{?>
+					 <?php
+					//echo var_dump($timeSlotRpt);
+				//echo $timeSlotRpt;
+				}
+
 				?>
-				</p>
+				
 			</div>
 		</section>
 	</div>	

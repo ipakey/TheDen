@@ -230,7 +230,7 @@
 		} 
 			
 		
-echo $slot;
+//echo $slot;
 		return $slot;
 	 	mysqli_stmt_close();
 	}
@@ -240,10 +240,12 @@ echo $slot;
 
 	
 	function returnBookings($date){
+		require 'db_conn/dbh_bk.inc.php';
+//echo var_dump($date).' $date L243';
 		$booked=array();
-		$conncontacts = new mysqli('localhost', 'root', '', 'thedencontacts');
+		
 		$sql = ('SELECT bk_group, bk_timeslot, bk_confirmed, bk_subject, bk_date, bk_name, cu_id FROM book WHERE bk_date=?');
-		$stmt = mysqli_stmt_init($conncontacts);
+		$stmt = mysqli_stmt_init($connbookings);
 
 		if (!mysqli_stmt_prepare($stmt, $sql)){
 			header('Location: ../forms/bookingForm.php?error=stmtfailedcode=705:readconfirmbooking');
@@ -255,15 +257,14 @@ echo $slot;
 		}
 		mysqli_stmt_execute($stmt);
 		$resultData = mysqli_stmt_get_result($stmt);
-		while($row=mysqli_fetch_assoc($resultData)){		
+		
+		while($row=mysqli_fetch_assoc($resultData)){
+				
 			array_push($booked, $row);
-			
-			//array_push($booked, $record);
 		} 
-			
+		
 		$bookedCount= bkdCnts($booked);	
 		$bookedAmend = bkdAmend($booked, $bookedCount);
-//echo 'Booked slots: '.var_dump($bookedAmend);
 		return $bookedAmend;
 	 	mysqli_stmt_close();
 		
@@ -503,7 +504,7 @@ echo $slot;
 		$sneDate = date('Y-m-d', strtotime( $wk . " +6 days"));
 		array_push($sNEDate, $sneDate);
 
-		echo var_dump($sNEDate).' $sNEDate at L506 ';
+		//echo var_dump($sNEDate).' $sNEDate at L506 ';
 		return	 $sNEDate;
 		
 		
@@ -534,8 +535,18 @@ echo $slot;
 		}
 		
 		array_push($dateRange, $startDate, $endDate);
-		echo var_dump($dateRange).' dateRange at line 537  ';
-		return $dateRange;
+		$d = $startDate;
+		$i = 1;
+		$dates = array();
+		
+		while($d <= $endDate){
+			array_push($dates, $d);
+			$d = date('Y-m-d', strtotime($startDate. " + $i day"));
+			$i++;
+		}
+//echo var_dump($dates).' $dates ' ;
+//echo var_dump($dateRange).' dateRange at line 537  ';
+		return $dates;
 		
 	}
 	
@@ -590,55 +601,22 @@ echo $slot;
 
 	
 /*************************************Find Bookings made reporting Private Data ********************************************/
-	function findBookingsReport($dateRange, $user){
-//echo $week.'  '.$year.'  '.$user.'  arriving in findBookings';
-		$i=0;
-	/*	if($wk != null){*/
-		$startDate = $dateRange[0];
-		$endDate = $dateRange[1];
-		echo $startDate.$endDate;
+	function findBookingsReport($dates, $user){
+		$bkd = array();
+		//echo $user.' User '.var_dump($dates).' $dates at L605';
 		
-		
-		$bkd = retrieveBookings($startDate, $endDate); /*
-		}
-		elseif($mt_value != null){
-		$sNEDate = getStartAndEndDateMth($year, $week);
-		$bkd = retrieveBookings($sNEDate);
-		}
-		else{
-		$sNEDate = "all";
-		$bkd = retrieveBookings($sNEDate);	
-		} */
-		
-//echo var_dump($sNEDate).' dates $sNDate in findBookings';
-		
-//echo var_dump($bkd).' rBkd --> ';
-		//$inds = IndBookings($bkd);
-		//$groups= GrpBookings($bkd);	
-//echo 'After date grouping   '.var_dump($inds).'  Inds '.var_dump($groups).' Groups';
-		//$subject =  subjects($bkd);
-		//$sBkd = checkTimeSlotReport($bkd, $inds, $groups, $subject);
+		foreach($dates as $d){
+			//echo $d;
+			$b = returnBookings($d);
+			array_push($bkd, $b);
+			//echo var_dump($b);
+			
+		}	
 //echo var_dump($bkd).' $bkd at end of findBookings ';
+		
 		return $bkd;
-
 	}
 	
-	function retrieveBookings($sNEDate){
-		$bkd = array();
-		$sBkd = array();
-		$dBookings=array();
-		echo var_dump($sNEDate).' $sNEDATE at line 615 ';
-		foreach($sNEDate as $bookedDate){
-//echo $bookedDate;
-			$rBkd = returnBookings($bookedDate);			
-			
-			if(count($rBkd) >0 ){
-				array_push($bkd, $rBkd);
-			}
-			
-		}
-		return $bkd;
-	}
 	
 	function subjectsRpt($booked){
 		$subject = array();
@@ -737,74 +715,68 @@ echo $slot;
 	}
 	
 		
-	function displayTimeSlotReport($booked, $wk){
-		$dateRange = getStartAndEndDate($wk);
-		$bkd = selectIndBookings($booked, $wk);
-//echo var_dump($bkd);
+	function displayTimeSlotReport($booked){
+		$bkd = selectIndBookings($booked);
 		$reportData = createReportDisplay($bkd);
-		return $reportData;
+		return $reportData;	
+
+
 	}
 		
-	function createReportDisplay($bkd){
+	function createReportDisplay($bkdAll){
 				
 				//First create and array of the days in a week
-		$daysOfWeek = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-		
+		//$daysOfWeek = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+		$bkd = array_unique($bkdAll,SORT_REGULAR);
 
-       $conncontacts = new mysqli('localhost', 'root', '', 'thedencontacts');// connect to your host
-        //Check for connection error
-        if(mysqli_connect_error()){
-         die("Error in DB connection: ".mysqli_connect_errno()." - ".mysqli_connect_error());
-        }
-        $stmt = "SELECT * FROM book WHERE bk_date >=?;";
-		
-		
-        echo "<table width='70%' >";
-        $i = 0;
-       $resultData = mysqli_stmt_get_result($stmt);
-		while($row=mysqli_fetch_assoc($resultData)){
-            if($i % 2 == 0){
-                echo '<tr>';
-            }
-            echo '<td>'.$bookings.'</td>';
-            if($i % 2 == 1){
-                echo '</tr>';
-            }
-            $i++;
-        }
-        echo "</table>";
-         
-
+        //echo "<table width='70%' >";
 				//Now create the HTML table
-		$report="<table class='table table-bordered'>";
-		$report.="<center><h4 class='pageText'><td class='pageText'> Confirmed</td> <td class='pageText'>Timeslot</td>
+		$report="<table width='100%' ><table class='table table-bordered'>";
+		$report.="<center><h4 class='pageText'>
+		<td class='pageText'> Confirmed</td> 
+		<td class='pageText'>Timeslot</td>
 		<td class='pageText'>Date</td>
 		<td class='pageText'>Subject</td>
 		<td class='pageText'>Name</td>
-		<td class='pageText'>Session Type</td>
-		<td class='pageText'>Customer Id</td>
+		<td class='pageText'>Session Type</td><td style='width:5px'></td>
+		<td class='pageText'> Confirmed</td> 
+		<td class='pageText'>Timeslot</td>
+		<td class='pageText' style='width:8%'>Date</td>
+		<td class='pageText'>Subject</td>
+		<td class='pageText'>Name</td>
+		<td class='pageText'>Session Type</td>		
 		</h4></center></br></tr>";
 		$report.="";
 				//fill in day by day
-			foreach($bkd as $data){;
-//echo var_dump($data);
-				$confirmed = $data['bk_confirmed'];
-				$ts = $data['bk_timeslot'];
-				$date = $data['bk_date'];
-				$a = $data['bk_subject'];
-				$b = $data['bk_name'];
-				$c = $data['bk_group'];
-				$d = $data['cu_id'];
-	
-		$report.="<p class='pageText'><td class='pageText'>$confirmed</td><td class='pageText'>$ts</td><td class='pageText'>$date</td><td class='pageText'>$a</td><td class='pageText'>$b</td><td class='pageText'>$c</td><td class='pageText'>$d</td></p>";	
+        $i = 0;
+		foreach ($bkd as $data){
+			$confirmed = $data['bk_confirmed'];
+			$ts = $data['bk_timeslot'];
+			$date = $data['bk_date'];
+			$dates = date_create_from_format("Y-m-d", $date)->format('d-m');
+			//date_format($dates, 'd-m'); 
+			//$dateSht = strvalue($dates);
+			
+			$a = $data['bk_subject'];
+			$b = $data['bk_name'];
+			$c = $data['bk_group'];
+			$d = $data['cu_id'];
+		
+		    if($i % 2 == 0){
+				$report.="</tr><p class='pageText'><td class='pageText'>$confirmed</td><td class='pageText'>$ts</td><td class='pageText' style='width:8%'>$dates</td><td class='pageText'>$a</td><td class='pageText' style='width:15%'>$b</td><td class='pageText'>$c</td></p>";	
+                }
+	        if($i % 2 == 1){
+				$report.="<td></td><p class='pageText'><td class='pageText'>$confirmed</td><td class='pageText'>$ts</td><td class='pageText' style='width:8%'>$dates</td><td class='pageText'>$a</td><td class='pageText' style='width:15%'>$b</td><td class='pageText'>$c</td></p>";	
+                //echo '</tr>';
+            }
+            $i++;
+        }
 		$report.="</tr><tr>";
-			}
 		$report.="</table>";
-//echo var_dump($timeSlotRpt);
-				echo $report;
+		echo $report;
 	}
 		
-	function selectIndBookings($booked, $wk){
+	function selectIndBookings($booked){
 		$indData = array();
 
 		if($_SESSION['userId'] > 10 ){
@@ -820,7 +792,7 @@ echo $slot;
 					}
 				}
 			}
-echo var_dump($indData);
+//echo var_dump($indData);
 			
 		}
 		else{

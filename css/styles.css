@@ -798,7 +798,7 @@ formHeaderText {
 
 .table-bordered{border:1px solid #dee2e6}.table-bordered td,.table-bordered th{border:1px solid #dee2e6}.table-bordered thead td,.table-bordered thead th{border-bottom-width:2px}.table-striped tbody tr:nth-of-type(odd){background-color:rgba(0,0,0,.05)}.table-hover tbody tr:hover{background-color:rgba(0,0,0,.075)}
 
-.table{width:95%;max-width:95%;margin-bottom:1rem;background-color:transparent; table-layiyt:fixed}.table td,.table th{padding:.75rem;vertical-align:top;border-top:1px solid #dee2e6}.table thead th{vertical-align:bottom;border-bottom:2px solid #dee2e6}.table tbody+tbody{border-top:2px solid #dee2e6}.table .table{background-color:#fff}
+.table{width:95%;max-width:95%;margin-bottom:1rem;background-color:transparent; table-layout:fixed}.table td,.table th{padding:.75rem;vertical-align:top;border-top:1px solid #dee2e6}.table thead th{vertical-align:bottom;border-bottom:2px solid #dee2e6}.table tbody+tbody{border-top:2px solid #dee2e6}.table .table{background-color:#fff}
 
 
 .btn-primary{color:#fff;background-color:#007bff;border-color:#007bff}
@@ -816,7 +816,7 @@ formHeaderText {
 }
 
 td{
-	width: 12%;
+	width: 45px;
 }
 
 th{
