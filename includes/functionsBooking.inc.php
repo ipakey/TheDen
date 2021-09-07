@@ -580,13 +580,13 @@
 /*************************************Find Bookings made reporting Private Data ********************************************/
 	function findBookingsReport($dates, $user){
 		$bkd = array();
-		//echo $user.' User '.var_dump($dates).' $dates at L605';
+//echo $user.' User '.var_dump($dates).' $dates at L605';
 		
 		foreach($dates as $d){
-			//echo $d;
+//echo $d;
 			$b = returnBookings($d);
 			array_push($bkd, $b);
-			//echo var_dump($b);
+			echo var_dump($b);
 			
 		}	
 //echo var_dump($bkd).' $bkd at end of findBookings ';

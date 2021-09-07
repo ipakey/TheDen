@@ -1,7 +1,7 @@
 <?php
 	
 	include_once '../includes/functions.php';
-	include_once '../includes/functionsBooking.php';
+	include_once '../includes/functionsBooking.inc.php';
 	/*************** Get date information ***********/		
 	$year = date('Y');
 	$week = date('W');
@@ -55,7 +55,7 @@
 			elseif($_POST['wk'] == 'mt'){$len = ' Month ';}
 			elseif($_POST['wk'] == 'all'){$len = ' All Records';}
 			else{$len = ' no selection made yet';}
-		echo "You have selected : ".$len;  //  Displaying Selected Value
+		echo "/n You have selected : ".$len;  //  Displaying Selected Value
 		$wk = $_POST['wk'];
 		}
 		$dates = getStartAndEndDateRpt($wk);
@@ -64,7 +64,7 @@
 		$booked = findBookingsReport($dates, $user);
 		//echo ' bookings found ';
 		
-		$timeSlotRpt = displayTimeSlotReport($booked, $user);
+		$timeSlotRpt = displayTimeSlotReport($booked);
 	}
 	?>
 		
